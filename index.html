@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiz="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <div id="boardContainer">
+            <header class="grid-item item1">
+                    <ul class="nav-items">
+                        <li style="--i:1" class="active"><a class="active" href="#">Wilson's algorithm</a></li>
+                        <li style="--i:2"><a href="#">Prim's algorithm</a></li>
+                        <li style="--i:3"><a href="#">Krushkal's algorithm</a></li>
+                    </ul>
+            </header>
+            <div class = "grid-item item2" id="params">
+                <label for="numNodes">Input number of nodes: </label>
+                <input type="text" id="numNodes" value="20">
+                <br>
+                <button id="resetBtn">Generate</button>
+                <br>
+                <button id="resetSameBtn">Generate another with same vertices</button>
+
+            </div>
+            <!--<h1>Random Spanning Tree Generator!</h1>!-->
+            <div class = "grid-item item3" id="drawBoard-container">
+                <canvas  id="drawBoard" width="1000" height="600"></canvas>
+            </div>
+            
+
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
