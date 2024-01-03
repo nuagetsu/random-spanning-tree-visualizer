@@ -1,13 +1,12 @@
 const drawBoard = document.querySelector("#drawBoard");
 const drawBoardContainer = document.querySelector("#drawBoard-container");
 const ctx = drawBoard.getContext("2d");
-const getWidth = document.querySelector("#boardWidth");
-const getHeight = document.querySelector("#boardHeight");
 
+const nodeRange = document.querySelector("#nodeRange");
+const numNodes = document.querySelector("#numNodes");
 
 let boardWidth = drawBoard.width;
 let boardHeight = drawBoard.height;
-const numNodes = document.querySelector("#numNodes");
 let numPoints = 20;
 
 // IT WORKSSSSS :D
@@ -195,7 +194,18 @@ function run() {
 }
 
 function getParams() {
-    numPoints = numNodes.value;
+    if (numPoints != numNodes.value) {
+        if (numNodes.value == '') {
+            numPoints= 1;
+            nodeRange.value = 1;
+        } else {
+            numPoints = numNodes.value;
+            nodeRange.value = numPoints;
+        }
+    } else if (numPoints != nodeRange.value) {
+        numPoints = nodeRange.value;
+        numNodes.value = numPoints;
+    }
 }
 
 

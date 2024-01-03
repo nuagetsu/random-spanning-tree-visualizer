@@ -5,6 +5,7 @@ body {
     padding: 0px;
     overflow: hidden;
     background-color: #ABABAB;
+    font-family: Inter;
 }
 #boardContainer {
     text-align: center;
@@ -22,7 +23,6 @@ body {
 }
 
 .grid-item {
-    background-color: #3FF9BD;
     text-align: center;
     justify-content: space-evenly;
     font-size: 20px;
@@ -40,6 +40,71 @@ body {
     grid-area: 1 / 1 / span 2 / span 1;
     background-color: #323c46;
 
+}
+
+.item2 > .slider {
+    margin-top: 10%;
+    margin-bottom: 70%;
+    width: 20vw;
+    outline: none;
+    cursor: pointer;
+    height: 1px;
+    color: #ABCDEF;
+    background-color: #ABCDEF;
+    -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #ABCDEF;
+    color: #a9cdf1;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 10px solid rgba(72, 72, 72, 0.5);
+    background-color: #ABCDEF;
+    color: #a9cdf1;
+}
+
+.item2 > #numNodes {
+    background-color: #ABCDEF;
+    color: black;
+    padding: 10px;
+    text-align: center;
+    font-size: 15px;
+    width: 15vw;
+}
+
+.item2 > label {
+    font-size: 25px;
+    display: block;
+    margin-top: 5%;
+
+}
+
+.gen--button {
+    padding: 2vh;
+    border-radius: 8px;
+    background-color: rgb(208, 147, 250);
+    color: black;
+    border: none;
+    margin: 2vh;
+    width: 20vw;
+    font-size: 20px;
+}
+
+
+button.gen--button:hover {
+    background-color: rgb(140, 94, 173);
+    cursor: pointer;
 }
 
 .item3 {

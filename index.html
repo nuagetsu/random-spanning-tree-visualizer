@@ -5,6 +5,7 @@
         <meta http-equiz="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
@@ -17,12 +18,14 @@
                     </ul>
             </header>
             <div class = "grid-item item2" id="params">
-                <label for="numNodes">Input number of nodes: </label>
+                <label for="numNodes">Input number of nodes (1-100): </label><br>
                 <input type="text" id="numNodes" value="20">
                 <br>
-                <button id="resetBtn">Generate</button>
+                <input type="range" min="1" max="100" value="20" class="slider" id="nodeRange">
                 <br>
-                <button id="resetSameBtn">Generate another with same vertices</button>
+                <button id="resetBtn" class="gen--button">Generate</button>
+                <br>
+                <button id="resetSameBtn" class="gen--button">Generate with same vertices</button>
 
             </div>
             <!--<h1>Random Spanning Tree Generator!</h1>!-->
