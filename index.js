@@ -1,9 +1,15 @@
 const drawBoard = document.querySelector("#drawBoard");
-const drawBoardContainer = document.querySelector("#drawBoard-container");
-const ctx = drawBoard.getContext("2d");
+//const drawBoardContainer = document.querySelector("#drawBoard-container");
+//const ctx = drawBoard.getContext("2d");
+const editBoard = document.querySelector("#edit-canvas");
 
 const nodeRange = document.querySelector("#nodeRange");
 const numNodes = document.querySelector("#numNodes");
+const resetBtn = document.querySelector("#resetBtn");
+const resetSameBtn = document.querySelector("#resetSameBtn");
+const editBtn = document.querySelector("#editBtn");
+const doneBtn = document.querySelector("#done-button");
+const editScreen = document.querySelector("#edit-screen");
 
 let boardWidth = drawBoard.width;
 let boardHeight = drawBoard.height;
@@ -53,6 +59,27 @@ class Node {
         }
     }
     
+    static resetNodes() {
+        Node.nodes = [];
+    }
+
+    static removeNode(x, y) {
+        // TO DO: implement removing 
+        let afterRemoved = false;
+        Node.nodes.filter((node, index, arr) => {
+            if (Math.abs(node.xCoord - x) <= 1.5 && Math.abs(node.yCoord - y) <= 1.5) {
+                arr.splice(index, 1);
+                afterRemoved = true;
+                arr[index].index -= 1;
+                return true;
+            } else {
+                if (afterRemoved) {
+                    arr[index].index -= 1;
+                }
+                return false;
+            }
+        })
+    }
 
 }
 
@@ -69,13 +96,18 @@ class Graph {
     }
 
     resetNodes(num) {
+        /*
         Node.randomPoints(num);
         this.nodes = [];
         this.nodes = Node.nodes;
         this.length = num;
+        */
+        this.nodes = [];
+        this.length = 0;
     }
 
     wilsonsAlgo() {
+        
         let r1 = randomInt(0, this.length - 1);
         let alreadyTraversed = [this.nodes[r1].index];
         let nextPath = [];
@@ -149,7 +181,10 @@ function randomIntExclude(start, end, exclude) {
 }
 
 
-function drawPoints(edges) {
+function drawPoints(canvas, edges) {
+    let ctx = canvas.getContext("2d");
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     edges.forEach((edge) => {
         let node1 = Node.nodes[edge[0]];
         let node2 = Node.nodes[edge[1]];
@@ -157,8 +192,12 @@ function drawPoints(edges) {
         let y1 = node1.yCoord;
         let x2 = node2.xCoord;
         let y2 = node2.yCoord;
+        /*
         ctx.strokeStyle = "#E0BFB8";
         ctx.fillStyle = "#E0BFB8";
+        */
+        ctx.strokeStyle = "#ABCDEF";
+        ctx.fillStyle = "#ABCDEF";
         ctx.beginPath();
         ctx.arc(x1, y1, 3, Math.PI * 2, false);
         ctx.moveTo(x1, y1);
@@ -173,16 +212,13 @@ function drawPoints(edges) {
 
 
 function draw() {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, boardWidth, boardHeight);
+    Node.resetNodes();
     G = new Graph(numPoints);
-    drawPoints(G.wilsonsAlgo());
+    drawPoints(drawBoard, G.wilsonsAlgo());
 }
 
-function redraw() {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, boardWidth, boardHeight);
-    drawPoints(G.wilsonsAlgo());
+function redraw() { // drawing with same vertices 
+    drawPoints(drawBoard, G.wilsonsAlgo());
 }
 
 function run() {
@@ -208,13 +244,74 @@ function getParams() {
     }
 }
 
+function edit(canvas, event) {
+    let ctx = canvas.getContext("2d");
+    let {xCoord, yCoord} = getMousePosition(canvas, event);
+
+    let newNode = new Node(Node.nodes.length, xCoord, yCoord);
+    G.addNode(newNode);
+
+    ctx.strokeStyle = "#ABCDEF";
+    ctx.fillStyle = "#ABCDEF";
+    ctx.beginPath();
+    ctx.arc(xCoord, yCoord, 3, Math.PI * 2, false);
+    ctx.fill();
+}
+
+function getMousePosition(canvas, event) {
+    // ratios to get the actual coords, as the canvas was stretched from its actual width/height due to CSS styling 
+    let ratioX = canvas.width / (canvas.getBoundingClientRect().right - canvas.getBoundingClientRect().left);
+    let ratioY = canvas.height / (canvas.getBoundingClientRect().bottom - canvas.getBoundingClientRect().top);
+    let x = (event.clientX - canvas.getBoundingClientRect().left) * ratioX;
+    let y = (event.clientY - canvas.getBoundingClientRect().top) * ratioY;
+    return {xCoord: x, yCoord: y};
+}
+
+function displayEdit() {
+    let ctx = editBoard.getContext("2d");
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, editBoard.width, editBoard.height);
+    Node.resetNodes();
+    G.resetNodes();
+    editScreen.style.display = "initial";
+}
+
+function closeEdit() {
+    scaleCoords(Node.nodes, editBoard, drawBoard);
+    editScreen.style.display = "none";
+    drawPoints(drawBoard, G.wilsonsAlgo());
+}
+
+function scaleCoords(nodes, oldBoard, newBoard) {
+    // scale coords based on position and size of the edit canvas and actual canvas to store correct
+    // coords for the graph 
+    let oldBoardCoords = oldBoard.getBoundingClientRect();
+    let newBoardCoords = newBoard.getBoundingClientRect();
+    let xOffset = oldBoardCoords.left - newBoardCoords.left;
+    let yOffset = oldBoardCoords.top - newBoardCoords.top;
+
+    let oldRatioX = oldBoard.width / (oldBoardCoords.right - oldBoardCoords.left);
+    let oldRatioY = oldBoard.height / (oldBoardCoords.bottom - oldBoardCoords.top);
+    let newRatioX = newBoard.width / (newBoardCoords.right - newBoardCoords.left);
+    let newRatioY = newBoard.height / (newBoardCoords.bottom - newBoardCoords.top);
+
+    nodes.forEach((node) => {
+        // scaling based on the ratio of each board's size (which is not 1 due to css styling stretch)
+        node.xCoord = ((node.xCoord * oldRatioX) - xOffset) * newRatioX;
+        node.yCoord = ((node.yCoord * oldRatioY) + yOffset) * newRatioY;
+    })
+}
+
 
 
 //G = new Graph(numPoints);
-const resetBtn = document.querySelector("#resetBtn");
+
 resetBtn.addEventListener("click", draw);
-const resetSameBtn = document.querySelector("#resetSameBtn");
 resetSameBtn.addEventListener("click", redraw);
+editBtn.addEventListener("click", displayEdit);
+editBoard.addEventListener("click", (event) => edit(editBoard, event));
+doneBtn.addEventListener("click", closeEdit);
+
 draw();
 run();
 
