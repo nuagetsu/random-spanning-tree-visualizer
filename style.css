@@ -4,8 +4,9 @@ body {
     margin: 0px;
     padding: 0px;
     overflow: hidden;
-    font-family: Inter;
+    font-family: Montserrat;
 }
+
 #boardContainer {
     text-align: center;
     display: grid;
@@ -70,11 +71,12 @@ body {
 
 .item2 > #numNodes {
     background-color: #ABCDEF;
-    color: black;
-    padding: 10px;
+    color: #323c46;
+    padding: 2vh;
     text-align: center;
-    font-size: 15px;
+    font-size: 20px;
     width: 15vw;
+    border-radius: 8px;
 }
 
 .item2 > label {
@@ -86,18 +88,25 @@ body {
 
 .gen-button {
     padding: 2vh;
-    border-radius: 8px;
-    background-color: #ABCDEF;
+    /*border-radius: 8px;*/
+    color: #ABCDEF;
+    /*background-color: #ABCDEF;
     color: black;
-    border: none;
+    border: none;*/
+    background-color: #323c46;
+    border: 2px solid #ABCDEF;
     margin: 2vh;
     width: 20vw;
     font-size: 20px;
+    font-family: Montserrat;
 }
 
 
 button.gen-button:hover {
-    background-color: #7f96ac;
+    background-color: #ABCDEF;
+    color: #323c46;
+    border: 2px solid #323c46;
+    /*background-color: #7f96ac;*/
     cursor: pointer;
 }
 
@@ -180,7 +189,7 @@ button.gen-button:hover {
 
 #edit-insn-container {
     margin-right: 41%;
-    margin-left: 7%;
+    margin-left: 5.5%;
     text-align: left;
     color: white;
 }
