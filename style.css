@@ -5,13 +5,14 @@ body {
     padding: 0px;
     overflow: hidden;
     font-family: Montserrat;
+    font-size: 15px;
 }
 
 #boardContainer {
     text-align: center;
     display: grid;
     background-color: #3A3B3C;
-    gap: 5px;
+    gap: 3px;
     margin: 0;
     overflow: hidden;
     width: 100vw;
@@ -25,7 +26,7 @@ body {
 .grid-item {
     text-align: center;
     justify-content: space-evenly;
-    font-size: 20px;
+    font-size: 15px;
     color: white;
   }
 
@@ -54,18 +55,18 @@ body {
 
 .slider::-webkit-slider-thumb {
     appearance: none;
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     border-radius: 50%;
     background-color: #ABCDEF;
 }
 
 .slider::-webkit-slider-thumb:hover {
     -webkit-appearance: none;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
-    border: 10px solid rgba(72, 72, 72, 0.5);
+    border: 8px solid rgba(72, 72, 72, 0.5);
     background-color: #ABCDEF;
 }
 
@@ -74,13 +75,14 @@ body {
     color: #323c46;
     padding: 2vh;
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     width: 15vw;
+    border: 1px solid #323c46;
     border-radius: 8px;
 }
 
 .item2 > label {
-    font-size: 25px;
+    font-size: 20px;
     display: block;
     margin-top: 5%;
 
@@ -94,10 +96,10 @@ body {
     color: black;
     border: none;*/
     background-color: #323c46;
-    border: 2px solid #ABCDEF;
+    border: 1px solid #ABCDEF;
     margin: 2vh;
     width: 20vw;
-    font-size: 20px;
+    font-size: 15px;
     font-family: Montserrat;
 }
 
@@ -105,7 +107,7 @@ body {
 button.gen-button:hover {
     background-color: #ABCDEF;
     color: #323c46;
-    border: 2px solid #323c46;
+    border: 1px solid #323c46;
     /*background-color: #7f96ac;*/
     cursor: pointer;
 }
@@ -171,11 +173,12 @@ button.gen-button:hover {
     left: 50%;
     transform: translate(-50%, -50%); /*what is this magic why does it center
     Oh! its cause u move the corner to center, then move back 50% of size*/
-    width: 1150px;
-    height: 700px;
+    width: 900px;
+    height: 500px;
     background-color: #323c46;
-    padding: 2em; /*search what em means tmr*/
+    padding: 1em; /*search what em means tmr*/
     display: none;
+    border: 4px solid white;
 }
 
 #edit-canvas {
