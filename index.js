@@ -2,7 +2,7 @@ import {getMousePosition, randomInt, randomIntExclude, scaleCoords} from "./util
 import {Node, Graph} from "./graph.js";
 import {drawPoints, draw, redraw} from "./draw.js";
 import {edit, displayEdit, closeEdit} from "./edit.js";
-import {changeScreen} from "./screen.js";
+
 
 const drawBoard = document.querySelector("#drawBoard");
 const editBoard = document.querySelector("#edit-canvas");
@@ -65,6 +65,14 @@ function getParams() {
     }
 }
 
+function changeScreen(to, toContainer) {
+    currentActive.classList.remove("active");
+    currentActiveContainer.classList.remove("active");
+    to.classList.add("active");
+    toContainer.classList.add("active")
+    currentActive = to;
+    currentActiveContainer = toContainer;
+}
 
 
 resetBtn.addEventListener("click", () => draw(drawBoard, numPoints));
@@ -72,9 +80,10 @@ resetSameBtn.addEventListener("click", () => redraw(drawBoard));
 editBtn.addEventListener("click", () => displayEdit(editBoard, editScreen, G));
 editBoard.addEventListener("click", (event) => edit(editBoard, event, G));
 doneBtn.addEventListener("click", () => closeEdit(editBoard, drawBoard, editScreen, G));
-wilsonsAlgoScreen.addEventListener("click", () => changeScreen(currentActive, currentActiveContainer, wilsonsAlgoScreen, wilsonsAlgoContainer));
-primsAlgoScreen.addEventListener("click", () => changeScreen(currentActive, currentActiveContainer, primsAlgoScreen, primsAlgoContainer));
-kruskalsAlgoScreen.addEventListener("click", () => changeScreen(currentActive, currentActiveContainer, kruskalsAlgoScreen, kruskalsAlgoContainer));
+wilsonsAlgoScreen.addEventListener("click", () => changeScreen(wilsonsAlgoScreen, wilsonsAlgoContainer));
+primsAlgoScreen.addEventListener("click", () => changeScreen(primsAlgoScreen, primsAlgoContainer));
+kruskalsAlgoScreen.addEventListener("click", () => changeScreen(kruskalsAlgoScreen, kruskalsAlgoContainer));
+
 
 
 draw(drawBoard, numPoints);
