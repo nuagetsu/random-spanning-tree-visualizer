@@ -2,10 +2,9 @@ import {getMousePosition, randomInt, randomIntExclude, scaleCoords} from "./util
 import {Node, Graph} from "./graph.js";
 import {drawPoints, draw, redraw} from "./draw.js";
 import {edit, displayEdit, closeEdit} from "./edit.js";
+import {changeScreen} from "./screen.js";
 
 const drawBoard = document.querySelector("#drawBoard");
-//const drawBoardContainer = document.querySelector("#drawBoard-container");
-//const ctx = drawBoard.getContext("2d");
 const editBoard = document.querySelector("#edit-canvas");
 
 const nodeRange = document.querySelector("#nodeRange");
@@ -15,20 +14,25 @@ const resetSameBtn = document.querySelector("#resetSameBtn");
 const editBtn = document.querySelector("#editBtn");
 const doneBtn = document.querySelector("#done-button");
 const editScreen = document.querySelector("#edit-screen");
+const wilsonsAlgoScreen = document.querySelector("#wilsons");
+const primsAlgoScreen = document.querySelector("#prims");
+const kruskalsAlgoScreen = document.querySelector("#kruskals");
+const wilsonsAlgoContainer = document.querySelector("#wilsons-container")
+const primsAlgoContainer = document.querySelector("#prims-container")
+const kruskalsAlgoContainer = document.querySelector("#kruskals-container")
 
 
 let numPoints = 20;
 let G = new Graph(drawBoard, numPoints);
+let currentActive = wilsonsAlgoScreen;
+let currentActiveContainer = wilsonsAlgoContainer;
 
-// IT WORKSSSSS :D
+
 /* TO DO: 
-DONE 1) Implement button so user can input how many pts they want + to generate new, 
-DONE 2) Maybe another cat to generate new spanning tree w vertices.
 3) If ambitious (for some reason), make it such that they can drag the pts around themselves, 
 like an edit mode, and add pts. 
 4) Perhaps even animation for wilson's algo. 
 5) Add comments to code. 
-6) Push to git + remote repo
 7) Make it *sparkle* aesthetic *sparkle*
 8) Liike maybe add animations so it moves
 9) split into diff files 
@@ -39,9 +43,6 @@ like an edit mode, and add pts.
 
 */
 
-
-
-
 function run() {
     setTimeout(()=> {
         getParams();
@@ -49,7 +50,6 @@ function run() {
         run();
     }, 75);
 }
-
 function getParams() {
     if (numPoints != numNodes.value) {
         if (numNodes.value == '') {
@@ -67,29 +67,15 @@ function getParams() {
 
 
 
-
-
-//G = new Graph(numPoints);
-
 resetBtn.addEventListener("click", () => draw(drawBoard, numPoints));
 resetSameBtn.addEventListener("click", () => redraw(drawBoard));
 editBtn.addEventListener("click", () => displayEdit(editBoard, editScreen, G));
 editBoard.addEventListener("click", (event) => edit(editBoard, event, G));
 doneBtn.addEventListener("click", () => closeEdit(editBoard, drawBoard, editScreen, G));
+wilsonsAlgoScreen.addEventListener("click", () => changeScreen(currentActive, currentActiveContainer, wilsonsAlgoScreen, wilsonsAlgoContainer));
+primsAlgoScreen.addEventListener("click", () => changeScreen(currentActive, currentActiveContainer, primsAlgoScreen, primsAlgoContainer));
+kruskalsAlgoScreen.addEventListener("click", () => changeScreen(currentActive, currentActiveContainer, kruskalsAlgoScreen, kruskalsAlgoContainer));
+
 
 draw(drawBoard, numPoints);
 run();
-
-
-
-/*
-A.forEach(element => {
-    console.log(element);
-    /*
-    console.log(Node.nodes[element[0]] .xCoord);
-    console.log(Node.nodes[element[0]].yCoord);
-    console.log(Node.nodes[element[1]].xCoord);
-    console.log(Node.nodes[element[1]].yCoord);
-});
-
-*/
