@@ -3,7 +3,7 @@ import {Node, Graph} from "./graph.js";
 import {drawPoints, draw, redraw} from "./draw.js";
 export {edit, displayEdit, closeEdit};
 
-
+// adds a new node at x, y mouse poisition upon click
 function edit(canvas, event, G) {
     let ctx = canvas.getContext("2d");
     let {xCoord, yCoord} = getMousePosition(canvas, event);
@@ -18,7 +18,8 @@ function edit(canvas, event, G) {
     ctx.fill();
 }
 
-function displayEdit(canvas, container, G) { // container to set the css display for the edit screen
+function displayEdit(canvas, container, G) { 
+    // container to set the css display for the edit screen
     let ctx = canvas.getContext("2d");
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);

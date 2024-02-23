@@ -1,4 +1,5 @@
 export {getMousePosition, randomInt, randomIntExclude, scaleCoords};
+
 function getMousePosition(canvas, event) {
     // ratios to get the actual coords, as the canvas was stretched from its actual width/height due to CSS styling 
     let ratioX = canvas.width / (canvas.getBoundingClientRect().right - canvas.getBoundingClientRect().left);
@@ -13,8 +14,6 @@ function randomInt(start, end) {
     return x;
 }
 
-
-
 function randomIntExclude(start, end, exclude) {
     let x = randomInt(start, end);
     if (exclude.includes(x)) {
@@ -23,7 +22,6 @@ function randomIntExclude(start, end, exclude) {
         return x;
     }
 }
-
 
 function scaleCoords(nodes, oldBoard, newBoard) {
     // scale coords based on position and size of the edit canvas and actual canvas to store correct

@@ -13,6 +13,7 @@ class Node {
         Node.nodes.push(this);
     }
 
+    // generates numPoints nodes of random coordinates
     static randomPoints(canvas, numPoints){
         Node.nodes = [];
         let x_offset = canvas.width / 5;
@@ -32,7 +33,9 @@ class Node {
     }
 
     static removeNode(x, y) {
-        // TO DO: implement removing 
+        // TO DO: implement removing
+        // Attemps to take in the x and y coordinates of a mouse click, and remove any nodes
+        // within a certain radius. But doesn't work, get's jammed and behaves weirdly
         let afterRemoved = false;
         Node.nodes.filter((node, index, arr) => {
             if (Math.abs(node.xCoord - x) <= 1.5 && Math.abs(node.yCoord - y) <= 1.5) {

@@ -7,6 +7,7 @@ function drawPoints(canvas, edges) {
     let ctx = canvas.getContext("2d");
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // draws points and their connection for every edge in the edge array
     edges.forEach((edge) => {
         let node1 = Node.nodes[edge[0]];
         let node2 = Node.nodes[edge[1]];
@@ -15,6 +16,7 @@ function drawPoints(canvas, edges) {
         let x2 = node2.xCoord;
         let y2 = node2.yCoord;
         /*
+        nice pink color!
         ctx.strokeStyle = "#E0BFB8";
         ctx.fillStyle = "#E0BFB8";
         */

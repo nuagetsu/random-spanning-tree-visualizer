@@ -3,7 +3,7 @@ import {Node, Graph} from "./graph.js";
 import {drawPoints, draw, redraw} from "./draw.js";
 import {edit, displayEdit, closeEdit} from "./edit.js";
 
-
+// Defining constants for html elements
 const drawBoard = document.querySelector("#drawBoard");
 const editBoard = document.querySelector("#edit-canvas");
 
@@ -21,36 +21,20 @@ const wilsonsAlgoContainer = document.querySelector("#wilsons-container")
 const primsAlgoContainer = document.querySelector("#prims-container")
 const kruskalsAlgoContainer = document.querySelector("#kruskals-container")
 
-
 let numPoints = 20;
 let G = new Graph(drawBoard, numPoints);
 let currentActive = wilsonsAlgoScreen;
 let currentActiveContainer = wilsonsAlgoContainer;
 
-
-/* TO DO: 
-3) If ambitious (for some reason), make it such that they can drag the pts around themselves, 
-like an edit mode, and add pts. 
-4) Perhaps even animation for wilson's algo. 
-5) Add comments to code. 
-7) Make it *sparkle* aesthetic *sparkle*
-8) Liike maybe add animations so it moves
-9) split into diff files 
-10) use await/async stuff to learn and know
-11) use react to make it instead
-12) add another mode w prims/krushkals/weighted graph. (probably not)
-13) add packages.json for modules that need installing (not that I used any)
-
-*/
-
 function run() {
     setTimeout(()=> {
         getParams();
-        //resetBtn.addEventListener("click", () => draw(numPoints));
         run();
     }, 75);
 }
+
 function getParams() {
+    // updates numPoints from the slider
     if (numPoints != numNodes.value) {
         if (numNodes.value == '') {
             numPoints= 1;
@@ -66,6 +50,7 @@ function getParams() {
 }
 
 function changeScreen(to, toContainer) {
+    // update display to show which algo user is currently on
     currentActive.classList.remove("active");
     currentActiveContainer.classList.remove("active");
     to.classList.add("active");
