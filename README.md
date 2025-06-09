@@ -2,7 +2,7 @@
 Site is here: https://edayeo.github.io/random-spanningtree-visualizer/
 
 Preview:
-![Alt text](https://github.com/EdaYeo/random-spanningtree-visualizer/blob/master/images/screenshot.png)
+![Alt text](https://github.com/EdaYeo/random-spanning-tree-visualizer/blob/master/images/screenshot.png)
 
 ## Description
 A website to generate random spanning trees and visualize them. The spanning trees are generated using Wilson's Algorithm, which guarantees a uniformly random spanning tree generation (meaning all spanning trees given a set of points have an equal chance of being generated). Otherwise, can be used as a constellation generator!
