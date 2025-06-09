@@ -1,5 +1,5 @@
 # Random Spanning Tree Visualizer
-Site is here: https://edayeo.github.io/random-spanningtree-visualizer/
+Site is here: https://edayeo.github.io/random-spanning-tree-visualizer/
 
 Preview:
 ![Alt text](https://github.com/EdaYeo/random-spanning-tree-visualizer/blob/master/images/screenshot.png)
